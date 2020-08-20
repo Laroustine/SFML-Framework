@@ -1,9 +1,8 @@
-#include "FileUtil.h"
-
 #include <fstream>
 #include <sstream>
 #include <iostream>
 #include <stdexcept>
+#include "Util/FileUtil.hpp"
 
 std::string getFileContent(const std::string& filePath, bool throws)
 {

@@ -1,8 +1,7 @@
 #pragma once
 
-
-#include "StateBase.h"
-#include "../GUI/StackMenu.h"
+#include "States/StateBase.hpp"
+#include "GUI/StackMenu.hpp"
 
 /**
     Game state for the main part of the game

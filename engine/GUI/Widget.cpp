@@ -1,4 +1,4 @@
-#include "Widget.h"
+#include "GUI/Widget.hpp"
 
 namespace gui {
 
@@ -13,7 +13,7 @@ Widget::Text::Text()
 
 bool Widget::Rectangle::isRolledOn(const sf::RenderWindow& window) const
 {
-    auto pos = sf::Mouse::getPosition(window);
+    sf::Vector2i pos = sf::Mouse::getPosition(window);
     return getGlobalBounds().contains((float)pos.x, (float)pos.y);
 }
 

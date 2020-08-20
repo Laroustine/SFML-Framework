@@ -1,8 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-
-#include "../Util/NonCopyable.h"
+#include "Util/NonCopyable.hpp"
 
 class Game;
 

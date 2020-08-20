@@ -1,8 +1,7 @@
 #pragma once
 
 #include <functional>
-
-#include "Widget.h"
+#include "GUI/Widget.hpp"
 
 namespace gui
 {

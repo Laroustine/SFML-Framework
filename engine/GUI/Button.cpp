@@ -1,6 +1,5 @@
-#include "Button.h"
-
 #include <iostream>
+#include "GUI/Button.hpp"
 
 namespace gui {
 
@@ -38,7 +37,7 @@ void Button::setTexture (const sf::Texture& tex)
 
 void Button::handleEvent(sf::Event e, const sf::RenderWindow& window)
 {
-    auto pos = sf::Mouse::getPosition(window);
+    sf::Vector2i pos = sf::Mouse::getPosition(window);
 
     switch(e.type) {
         case sf::Event::MouseButtonPressed:

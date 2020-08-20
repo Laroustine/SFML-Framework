@@ -1,8 +1,6 @@
-#include "Game.h"
-
-#include "States/StatePlaying.h"
-
 #include <iostream>
+#include "States/StatePlaying.hpp"
+#include "Game.hpp"
 
 Game::Game()
 :   m_window    ({1280, 720}, "Space Invaders")
@@ -20,16 +18,16 @@ void Game::run()
     unsigned ticks = 0;
 
     sf::Clock timer;
-    auto lastTime = sf::Time::Zero;
-    auto lag      = sf::Time::Zero;
+    sf::Time lag = sf::Time::Zero;
+    sf::Time lastTime = sf::Time::Zero;
 
     //Main loop of the game
     while (m_window.isOpen() && !m_states.empty()) {
-        auto& state = getCurrentState();
+        StateBase& state = getCurrentState();
 
         //Get times
-        auto time = timer.getElapsedTime();
-        auto elapsed = time - lastTime;
+        sf::Time time = timer.getElapsedTime();
+        sf::Time elapsed = time - lastTime;
         lastTime = time;
         lag += elapsed;
 

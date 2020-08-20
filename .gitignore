@@ -1,8 +1,15 @@
-Debug/
-Release/
-*.dll
-*.vcxproj
-*.filters
-*.user
-*.sln
-*
+# CMake
+cmake_modules
+CMakeCache.txt
+CMakeFiles
+*.cmake
+Makefile
+
+# Valgrind
+vgcore.*
+
+# Folder
+.vscode
+
+# Project Name
+sfml

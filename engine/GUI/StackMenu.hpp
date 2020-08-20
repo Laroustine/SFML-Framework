@@ -1,11 +1,10 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include <vector>
 #include <memory>
-
-#include "Widget.h"
-#include "../Util/NonCopyable.h"
+#include <SFML/Graphics.hpp>
+#include "GUI/Widget.hpp"
+#include "Util/NonCopyable.hpp"
 
 namespace gui
 {
@@ -25,7 +24,7 @@ class StackMenu : public NonCopyable
         /*
         template<typename T, typename... Args>
         void addWidget(Args&&... args) {
-            auto w = std::make_unique<T>(std::forward<Args>(args)...);
+            std::shared_ptr<T> w = std::make_unique<T>(std::forward<Args>(args)...);
             initWidget(*w);
             m_widgets.push_back(std::move(w));
         }*/

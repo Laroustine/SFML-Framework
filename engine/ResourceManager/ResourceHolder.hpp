@@ -2,10 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-
-#include "ResourceManager.h"
-#include "../Util/NonCopyable.h"
-#include "../Util/NonMoveable.h"
+#include "ResourceManager/ResourceManager.hpp"
+#include "Util/NonCopyable.hpp"
+#include "Util/NonMoveable.hpp"
 
 class ResourceHolder : public NonCopyable, public NonMovable
 {

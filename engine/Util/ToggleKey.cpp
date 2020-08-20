@@ -1,4 +1,4 @@
-#include "ToggleKey.h"
+#include "Util/ToggleKey.hpp"
 
 ToggleKey::ToggleKey(sf::Keyboard::Key key)
 :   m_key (key)

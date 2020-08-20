@@ -1,8 +1,8 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include <memory>
-#include "../ResourceManager/ResourceHolder.h"
+#include <SFML/Graphics.hpp>
+#include "ResourceManager/ResourceHolder.hpp"
 
 namespace gui
 {

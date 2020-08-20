@@ -1,21 +1,56 @@
-cmake_minimum_required(VERSION 3.0)
+##
+## EPITECH PROJECT, 2019
+## Engine
+## File description:
+## CMakeLists
+##
 
-#Enable debug symbols
-if (NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose debug or release" FORCE)
-endif()
+cmake_minimum_required(VERSION 3.0.0)
 
-project(SFML_Framework)
+# Set project NAME and VERSION
+project("Little Game" VERSION 0.0.1)
 
-#Add the files
-file(GLOB_RECURSE SOURCES Source/*.cpp)
-add_executable(framework ${SOURCES})
+# All Flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -std=c++17")
 
-#Add libraries
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-find_package(SFML REQUIRED graphics network audio window system)
-target_link_libraries(framework ${SFML_LIBRARIES})
+# Files for EXE
+set(NAME_EXE "sfml")
+set(SOURCES_EXE
+    "src/main.cpp"
+    "class/Game.cpp"
+    "class/States/StatePlaying.cpp"
+    "engine/Util/ToggleKey.cpp"
+    "engine/Util/Maths.cpp"
+    "engine/Util/FPSCounter.cpp"
+    "engine/Util/FileUtil.cpp"
+    "engine/Util/Animation.cpp"
+    "engine/GUI/Widget.cpp"
+    "engine/GUI/Textbox.cpp"
+    "engine/GUI/StackMenu.cpp"
+    "engine/GUI/Button.cpp"
+    "engine/ResourceManager/ResourceHolder.cpp"
+    )
+    
+# Inlude Directory
+set(INCLUDE_EXE
+    "engine"
+    "class"
+    "include")
 
-#Copy resources
-file(COPY ${CMAKE_SOURCE_DIR}/res DESTINATION ${CMAKE_BINARY_DIR})
+include_directories(${INCLUDE_EXE})
 
+# Custom Command
+add_custom_target(
+    "fclean"
+    COMMAND make clean
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+# Create EXE
+add_executable(${NAME_EXE} ${SOURCES_EXE})
+
+# Link LIBS
+target_link_libraries(${NAME_EXE} "sfml-system")
+target_link_libraries(${NAME_EXE} "sfml-window")
+target_link_libraries(${NAME_EXE} "sfml-graphics")
+target_link_libraries(${NAME_EXE} "sfml-audio")
+target_link_libraries(${NAME_EXE} "sfml-network")

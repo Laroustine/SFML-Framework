@@ -1,4 +1,4 @@
-#include "ResourceHolder.h"
+#include "ResourceManager/ResourceHolder.hpp"
 
 ResourceHolder& ResourceHolder::get()
 {
@@ -8,8 +8,8 @@ ResourceHolder& ResourceHolder::get()
 
 ResourceHolder::ResourceHolder()
 :   fonts           ("fonts", "ttf")
-,   textures        ("txrs", "png")
-,   soundBuffers    ("sfx", "ogg")
+,   textures        ("images", "png")
+,   soundBuffers    ("sounds", "ogg")
 {
 
 }

@@ -1,10 +1,9 @@
-#include "StatePlaying.h"
-
-#include "../GUI/Button.h"
-#include "../GUI/Textbox.h"
-#include "../Game.h"
-
 #include <iostream>
+#include "States/StatePlaying.hpp"
+#include "GUI/Button.hpp"
+#include "GUI/Textbox.hpp"
+#include "Game.hpp"
+
 
 std::string test;
 
@@ -12,7 +11,7 @@ StatePlaying::StatePlaying(Game& game)
 :   StateBase   (game)
 ,   m_TestMenu  (game.getWindow(), 50)
 {
-    auto b = std::make_unique<gui::Button>();
+    std::unique_ptr<gui::Button> b = std::make_unique<gui::Button>();
     b->setText("Button 1");
     b->setFunction([]() {
         std::cout << "Button 1 clicked!" << '\n';

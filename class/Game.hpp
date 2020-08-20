@@ -3,10 +3,9 @@
 #include <memory>
 #include <vector>
 #include <SFML/Graphics.hpp>
-
-#include "States/StateBase.h"
-#include "Util/NonMoveable.h"
-#include "Util/FPSCounter.h"
+#include "States/StateBase.hpp"
+#include "Util/NonMoveable.hpp"
+#include "Util/FPSCounter.hpp"
 
 /**
     Main controlling class of the game.

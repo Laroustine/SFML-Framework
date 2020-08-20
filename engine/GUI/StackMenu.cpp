@@ -1,6 +1,5 @@
-#include "StackMenu.h"
-
-#include "../ResourceManager/ResourceHolder.h"
+#include "GUI/StackMenu.hpp"
+#include "ResourceManager/ResourceHolder.hpp"
 
 constexpr float BASE_Y = 95.0f;
 
@@ -76,7 +75,7 @@ void StackMenu::setTitle(const std::string & title)
 
 void StackMenu::handleEvent(sf::Event e, const sf::RenderWindow& window)
 {
-    for (auto& widget : m_widgets) {
+    for (std::unique_ptr<gui::Widget>& widget : m_widgets) {
         widget->handleEvent(e, window);
     }
 }
@@ -85,7 +84,7 @@ void StackMenu::render(sf::RenderTarget& renderer)
 {
     renderer.draw(m_background);
     renderer.draw(m_titleText);
-    for (auto& widget : m_widgets) {
+    for (std::unique_ptr<gui::Widget>& widget : m_widgets) {
         widget->render(renderer);
     }
 }
