@@ -1,7 +1,7 @@
 #pragma once
 
 #include <unordered_map>
-#include <string>
+#include <iostream>
 
 /**
     Holds all the resources of the game
@@ -38,6 +38,7 @@ class ResourceManager
                 Resource fail;
                 fail.loadFromFile(m_folder + "_fail_" + m_extention);
                 m_resources.insert(std::make_pair(name, fail));
+                std::cerr << "Asset '" << name << m_extention << "' Failed to load." << std::endl;
             }
             else {
                 m_resources.insert(std::make_pair(name, r));

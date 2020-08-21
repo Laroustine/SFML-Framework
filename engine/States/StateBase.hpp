@@ -14,10 +14,10 @@ class StateBase : public NonCopyable
 
         virtual ~StateBase() = default;
 
-        virtual void handleEvent(sf::Event e) {}
+        virtual void handleEvent(sf::Event e) {(void)e;}
         virtual void handleInput() = 0;
-        virtual void update(sf::Time deltaTime) {}
-        virtual void fixedUpdate(sf::Time deltaTime) {}
+        virtual void update(sf::Time deltaTime) {(void)deltaTime;}
+        virtual void fixedUpdate(sf::Time deltaTime) {(void)deltaTime;}
         virtual void render(sf::RenderTarget& renderer) = 0;
 
     protected:

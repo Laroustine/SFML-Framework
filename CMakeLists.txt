@@ -1,7 +1,4 @@
 ##
-## EPITECH PROJECT, 2019
-## Engine
-## File description:
 ## CMakeLists
 ##
 

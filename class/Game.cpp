@@ -3,7 +3,7 @@
 #include "Game.hpp"
 
 Game::Game()
-:   m_window    ({1280, 720}, "Space Invaders")
+:   m_window    ({1280, 720}, "SFML")
 {
     m_window.setPosition({m_window.getPosition().x, 0});
     m_window.setFramerateLimit(60);
@@ -13,8 +13,8 @@ Game::Game()
 //Runs the main loop
 void Game::run()
 {
-    constexpr unsigned TPS = 30; //ticks per seconds
-    const sf::Time     timePerUpdate = sf::seconds(1.0f / float(TPS));
+    constexpr unsigned TPS = 120; //ticks per seconds
+    const sf::Time timePerUpdate = sf::seconds(1.0f / float(TPS));
     unsigned ticks = 0;
 
     sf::Clock timer;
@@ -118,7 +118,6 @@ void Game::exitGame()
     m_shouldPop = true;
     m_shouldExit = true;
 }
-
 
 //on tin
 const sf::RenderWindow& Game::getWindow() const

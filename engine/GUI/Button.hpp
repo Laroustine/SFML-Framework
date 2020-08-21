@@ -32,7 +32,7 @@ namespace gui
 
             Rectangle   m_button;
             Text        m_text;
-            std::function<void(void)> m_function = [](){};
+            std::function<void(void)> m_function = [](){std::cout << "Button as been clicked!" << '\n';};
 
     };
 

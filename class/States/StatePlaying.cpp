@@ -4,9 +4,6 @@
 #include "GUI/Textbox.hpp"
 #include "Game.hpp"
 
-
-std::string test;
-
 StatePlaying::StatePlaying(Game& game)
 :   StateBase   (game)
 ,   m_TestMenu  (game.getWindow(), 50)
@@ -32,12 +29,12 @@ void StatePlaying::handleInput()
 
 void StatePlaying::update(sf::Time deltaTime)
 {
-
+    (void)deltaTime;
 }
 
 void StatePlaying::fixedUpdate(sf::Time deltaTime)
 {
-
+    (void)deltaTime;
 }
 
 void StatePlaying::render(sf::RenderTarget& renderer)

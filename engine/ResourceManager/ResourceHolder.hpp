@@ -11,9 +11,9 @@ class ResourceHolder : public NonCopyable, public NonMovable
     public:
         static ResourceHolder& get();
 
-        ResourceManager<sf::Font>           fonts;
-        ResourceManager<sf::Texture>        textures;
-        ResourceManager<sf::SoundBuffer>    soundBuffers;
+        ResourceManager<sf::Font> fonts;
+        ResourceManager<sf::Texture> textures;
+        ResourceManager<sf::SoundBuffer> soundBuffers;
 
     private:
         ResourceHolder();
