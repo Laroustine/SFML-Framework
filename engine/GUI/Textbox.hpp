@@ -15,9 +15,10 @@ namespace gui
             void setTexture     (const sf::Texture& tex);
 
             void handleEvent    (sf::Event e, const sf::RenderWindow& window) override;
-            void render         (sf::RenderTarget& renderer)    override;
-            void setPosition    (const sf::Vector2f& pos)       override;
-            sf::Vector2f getSize() const                        override;
+            void render         (sf::RenderTarget& renderer) override;
+            void setPosition    (const sf::Vector2f& pos) override;
+            sf::Vector2f getPosition() const override;
+            sf::Vector2f getSize() const override;
 
         private:
             void handleClick    (sf::Event e, const sf::RenderWindow& window);

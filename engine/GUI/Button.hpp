@@ -5,16 +5,11 @@
 
 namespace gui
 {
-    enum class ButtonSize
-    {
-        Small,
-        Wide,
-    };
 
     class Button : public gui::Widget
     {
         public:
-            Button(ButtonSize s = ButtonSize::Wide);
+            Button(WidgetSize s = WidgetSize::Wide128);
 
             void setFunction(std::function<void(void)> func);
             void setText    (const std::string& str);
@@ -22,8 +17,9 @@ namespace gui
 
             void handleEvent    (sf::Event e, const sf::RenderWindow& window) override;
             void render         (sf::RenderTarget& renderer) override;
-            void setPosition    (const sf::Vector2f& pos)   override;
-            sf::Vector2f getSize() const    override;
+            void setPosition    (const sf::Vector2f& pos) override;
+            sf::Vector2f getPosition() const override;
+            sf::Vector2f getSize() const override;
 
         private:
             void updateText();

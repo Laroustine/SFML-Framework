@@ -47,6 +47,11 @@ void TextBox::setPosition(const sf::Vector2f& pos)
     m_text.move(5, m_rect.getGlobalBounds().height / 2.5f);
 }
 
+sf::Vector2f TextBox::getPosition() const
+{
+    return (m_position);
+}
+
 sf::Vector2f TextBox::getSize() const
 {
     return  {m_rect.getSize().x,

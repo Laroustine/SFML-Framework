@@ -3,17 +3,21 @@
 
 namespace gui {
 
-Button::Button(ButtonSize s)
+Button::Button(WidgetSize s)
 {
     m_button.setOutlineThickness(1);
     m_button.setOutlineColor(sf::Color::Green);
     m_button.setFillColor(sf::Color::Black);
     switch (s) {
-        case ButtonSize::Wide:
+        case WidgetSize::Wide256:
             m_button.setSize({256, 64});
             break;
 
-        case ButtonSize::Small:
+        case WidgetSize::Wide128:
+            m_button.setSize({128, 64});
+            break;
+        default:
+            std::cerr << "Size of BUTTON not supported.\nSet to Wide128." << std::endl;
             m_button.setSize({128, 64});
             break;
     }
@@ -72,6 +76,16 @@ void Button::setPosition(const sf::Vector2f& pos)
     updateText();
 }
 
+sf::Vector2f Button::getPosition() const
+{
+    return (m_position);
+}
+
+sf::Vector2f Button::getSize() const
+{
+    return m_button.getSize();
+}
+
 void Button::updateText()
 {
     m_text.setOrigin(m_text.getGlobalBounds().width  / 2,
@@ -79,12 +93,6 @@ void Button::updateText()
 
     m_text.move(m_button.getGlobalBounds().width  / 2.0f,
                 m_button.getGlobalBounds().height / 2.5f);
-}
-
-
-sf::Vector2f Button::getSize() const
-{
-    return m_button.getSize();
 }
 
 }
