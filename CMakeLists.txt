@@ -21,6 +21,7 @@ set(SOURCES_EXE
     "engine/Util/FPSCounter.cpp"
     "engine/Util/FileUtil.cpp"
     "engine/Util/Animation.cpp"
+    "engine/GUI/Canvas.cpp"
     "engine/GUI/Widget.cpp"
     "engine/GUI/Textbox.cpp"
     "engine/GUI/StackMenu.cpp"
