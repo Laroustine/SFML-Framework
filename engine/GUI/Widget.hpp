@@ -13,6 +13,7 @@ namespace gui
         Wide128 = 128,
         Wide256 = 256,
         Huge512 = 512,
+        FullPicture = -1,
     };
 
     class Widget
