@@ -24,13 +24,9 @@ namespace gui
         private:
             void updateText();
 
-            sf::Vector2f    m_position;
-
             Rectangle   m_button;
             Text        m_text;
             std::function<void(void)> m_function = [](){std::cout << "Button as been clicked!" << '\n';};
 
     };
-
-    inline std::unique_ptr<Button> makeButton() { return std::make_unique<Button>(); }
 }
