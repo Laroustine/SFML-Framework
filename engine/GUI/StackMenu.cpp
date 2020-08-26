@@ -12,6 +12,11 @@ StackMenu::StackMenu(const sf::Vector2f& position)
     m_background.setOutlineThickness(5);
     m_background.setOutlineColor({40, 40, 40, 255});
     m_background.setPosition(position);
+
+    m_titleText.setPosition(position.x, position.y - 14);
+    m_titleText.setOutlineColor(sf::Color::Black);
+    m_titleText.setOutlineThickness(1);
+    m_titleText.setCharacterSize(18);
 }
 
 StackMenu::StackMenu(StackMenu&& other)
@@ -52,7 +57,7 @@ void StackMenu::initWidget(Widget& widget)
 void StackMenu::setTitle(const std::string & title)
 {
     m_titleText.setString(title);
-    m_titleText.setPosition(0, 0);
+    m_titleText.setOrigin(m_titleText.getGlobalBounds().width  / 2.0f, m_titleText.getGlobalBounds().height / 2);
 }
 
 void StackMenu::handleEvent(sf::Event e, const sf::RenderWindow& window)
@@ -65,10 +70,10 @@ void StackMenu::handleEvent(sf::Event e, const sf::RenderWindow& window)
 void StackMenu::render(sf::RenderTarget& renderer)
 {
     renderer.draw(m_background);
-    renderer.draw(m_titleText);
     for (std::unique_ptr<gui::Widget>& widget : m_widgets) {
         widget->render(renderer);
     }
+    renderer.draw(m_titleText);
 }
 
 }
