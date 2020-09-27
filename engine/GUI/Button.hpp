@@ -26,7 +26,9 @@ namespace gui
 
             Rectangle   m_button;
             Text        m_text;
-            std::function<void(void)> m_function = [](){std::cout << "Button as been clicked!" << '\n';};
+            std::function<void(void)> m_function = [](){std::cout << "Button as been clicked!" << std::endl;};
 
     };
+    inline std::unique_ptr<Button> makeButton(WidgetSize s = WidgetSize::Wide128)
+    { return std::make_unique<Button>(s); }
 }

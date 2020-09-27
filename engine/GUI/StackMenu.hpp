@@ -33,5 +33,7 @@ class StackMenu : public NonCopyable
         sf::RectangleShape m_background;
         Widget::Text m_titleText;
 };
+inline std::unique_ptr<StackMenu> makeStackMenu(const sf::Vector2f& position)
+    { return std::make_unique<StackMenu>(position); }
 
 }

@@ -25,4 +25,6 @@ namespace gui
         private:
             Rectangle m_rect;
     };
+    inline std::unique_ptr<Canvas> makeCanvas(WidgetSize s = WidgetSize::Small32)
+    { return std::make_unique<Canvas>(s); }
 }
