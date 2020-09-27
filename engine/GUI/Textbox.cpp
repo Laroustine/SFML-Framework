@@ -3,17 +3,38 @@
 
 namespace gui {
 
-TextBox::TextBox(std::string& modString)
-:   m_pModString (&modString)
+TextBox::TextBox(WidgetSize s, const std::string& modString)
+: m_pModString(modString)
 {
+    m_text.setString(m_pModString);
+    switch (s) {
+        case WidgetSize::Wide128:
+            m_rect.setSize({128, 64});
+            m_text.setCharacterSize(30);
+            break;
+        case WidgetSize::Wide256:
+            m_rect.setSize({256, 64});
+            m_text.setCharacterSize(30);
+            break;
+        default:
+            std::cerr << "Size of BUTTON not supported.\nSet to Wide256." << std::endl;
+            m_rect.setSize({256, 64});
+            m_text.setCharacterSize(30);
+            break;
+    }
+    m_rect.setOutlineColor({40, 40, 40});
+    m_rect.setOutlineThickness(2);
     m_label.setCharacterSize(15);
-    m_rect.setFillColor({52, 152, 219});
-    m_rect.setSize({256, 64});
 }
 
-void TextBox::setLabel(const std::string& str)
+void TextBox::setTitle(const std::string& str)
 {
     m_label.setString(str);
+}
+
+void TextBox::setTexture(const sf::Texture& tex)
+{
+    m_rect.setTexture(&tex, false);
 }
 
 void TextBox::handleEvent(sf::Event e, const sf::RenderWindow& window)
@@ -25,10 +46,10 @@ void TextBox::handleEvent(sf::Event e, const sf::RenderWindow& window)
 void TextBox::render(sf::RenderTarget& renderer)
 {
     if (!m_isActive) {
-        m_rect.setFillColor({52, 152, 219});
+        m_rect.setFillColor({180, 180, 180});
     }
     else {
-        m_rect.setFillColor({82, 132, 239});
+        m_rect.setFillColor({200, 200, 200});
     }
     renderer.draw(m_rect);
     renderer.draw(m_label);
@@ -42,9 +63,10 @@ void TextBox::setPosition(const sf::Vector2f& pos)
     m_rect.setPosition(m_position);
     m_label.setPosition(m_position.x,
                         m_position.y + m_label.getGlobalBounds().height -
-                                       m_rect.getGlobalBounds().height / 2);
+                                       m_rect.getGlobalBounds().height / 2
+                                       + 5);
     m_text.setPosition  (m_position);
-    m_text.move(5, m_rect.getGlobalBounds().height / 2.5f);
+    m_text.move(5, m_rect.getGlobalBounds().height / 3.6f);
 }
 
 sf::Vector2f TextBox::getPosition() const
@@ -94,16 +116,20 @@ void TextBox::handleTextInput (sf::Event e)
 
             if (isValidCharacter(keyCode)) {
                 if (m_text.getGlobalBounds().width + 30 <= m_rect.getGlobalBounds().width) {
-                    m_pModString->push_back(keyCode);
+                    m_pModString.push_back(keyCode);
                 }
+                m_text.setString(m_pModString);
 
             }
             else if (isBackspace(keyCode)) {
                 //prevents popping back an empty string
-                if (m_pModString->length() > 0)
-                    m_pModString->pop_back();
+                if (m_pModString.length() > 0)
+                    m_pModString.pop_back();
+                m_text.setString(m_pModString);
             }
-            m_text.setString(*m_pModString);
+            else if (isQuit(keyCode)) {
+                m_isActive = false;
+            }
         }
         break;
 
@@ -125,5 +151,9 @@ bool TextBox::isBackspace(unsigned char keycode)
     return keycode == 8;
 }
 
+bool TextBox::isQuit(unsigned char keycode)
+{
+    return (keycode == sf::Keyboard::Escape || keycode == sf::Keyboard::Enter);
+}
 
 }
