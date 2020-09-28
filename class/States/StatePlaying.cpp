@@ -9,21 +9,24 @@ StatePlaying::StatePlaying(Game& game)
 :   StateBase(game)
 ,   m_TestMenu({1280 / 2, 60})
 {
-    std::unique_ptr<gui::Button> b = std::make_unique<gui::Button>(gui::WidgetSize::Wide256);
-    std::unique_ptr<gui::Canvas> c = std::make_unique<gui::Canvas>(gui::WidgetSize::Huge512);
-    // std::unique_ptr<gui::TextBox> d = std::make_unique<gui::TextBox>(std::string("GEREF"));
+    std::unique_ptr<gui::Button> b = gui::makeButton();
+    std::unique_ptr<gui::Canvas> c = gui::makeCanvas(gui::WidgetSize::Huge512);
+    std::unique_ptr<gui::TextBox> d = gui::makeTextBox();
 
     b->setText("Button 1");
+    b->setTexture(ResourceHolder::get().textures.get("a_man"));
     b->setFunction([]() {
-        std::cout << "Button 1 clicked!" << '\n';
+        std::cout << "Button 1 has been clicked!" << '\n';
     });
 
-    c->setTexture(ResourceHolder::get().textures.get("a_man"));
+    c->setTexture(ResourceHolder::get().textures.get("a_man")) ;
     c->setSize({350, 350});
 
-    // m_TestMenu.addWidget(std::move(d));
+    d->setTitle("Enter Text:");
+
     m_TestMenu.setTitle("This is a Menu");
     m_TestMenu.addWidget(std::move(c));
+    m_TestMenu.addWidget(std::move(d));
     m_TestMenu.addWidget(std::move(b));
 }
 
