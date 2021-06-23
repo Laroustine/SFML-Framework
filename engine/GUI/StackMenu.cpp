@@ -1,41 +1,27 @@
 #include "GUI/StackMenu.hpp"
 #include "ResourceManager/ResourceHolder.hpp"
 
-constexpr float BASE_Y = 95.0f;
-
 namespace gui
 {
 
-StackMenu::StackMenu(const sf::RenderWindow& window, float baseY)
-:   m_basePosition  ((float)window.getSize().x / 2.0f, baseY)
-,   m_baseSize      (300, 20)
+StackMenu::StackMenu(const sf::Vector2f& position)
 {
-    m_background.setOutlineThickness(2);
-    m_background.setOutlineColor(sf::Color::Green);
-    m_background.setFillColor({100, 100, 100, 230});
-    m_background.setSize(m_baseSize);
-    m_background.setPosition(m_basePosition.x - m_baseSize.x / 2, baseY - 30);
+    m_background.setSize({300, 20});
+    m_background.setOrigin({150, 0});
+    m_background.setFillColor({100, 100, 100, 128});
+    m_background.setOutlineThickness(5);
+    m_background.setOutlineColor({40, 40, 40, 255});
+    m_background.setPosition(position);
 
-    m_titleText.setPosition(0, baseY - 35);
+    m_titleText.setPosition(position.x, position.y - 14);
     m_titleText.setOutlineColor(sf::Color::Black);
     m_titleText.setOutlineThickness(1);
-    m_titleText.setCharacterSize(30);
-}
-
-StackMenu::StackMenu(const sf::Vector2f& position)
-:   m_basePosition  (position)
-,   m_baseSize      (300, 20)
-{
-    m_background.setFillColor({100, 100, 100, 128});
-    m_background.setSize(m_baseSize);
-    m_background.setPosition(position);
+    m_titleText.setCharacterSize(18);
 }
 
 StackMenu::StackMenu(StackMenu&& other)
 :   m_widgets       (std::move(other.m_widgets))
 ,   m_background    (std::move(other.m_background))
-,   m_basePosition  (other.m_basePosition)
-,   m_baseSize      (other.m_baseSize)
 {
 }
 
@@ -43,8 +29,6 @@ StackMenu& StackMenu::operator=(StackMenu&& other)
 {
     m_widgets       =   std::move(other.m_widgets);
     m_background    =   std::move(other.m_background);
-    m_basePosition  =   other.m_basePosition;
-    m_baseSize      =   other.m_baseSize;
 
     return *this;
 }
@@ -57,20 +41,23 @@ void StackMenu::addWidget(std::unique_ptr<Widget> w)
 
 void StackMenu::initWidget(Widget& widget)
 {
-    widget.setPosition({m_basePosition.x - widget.getSize().x / 2,
-                       m_basePosition.y});
+    sf::Vector2f pos = m_background.getPosition();
+    sf::Vector2f size = m_background.getSize();
 
-
-    m_basePosition.y    += widget.getSize().y + 25;
-    m_baseSize.y        += widget.getSize().y + 25;
-    m_background.setSize(m_baseSize);
+    widget.setPosition({pos.x - widget.getSize().x / 2, pos.y});
+    pos.y += widget.getSize().y + 20;
+    size.y += widget.getSize().y + 20;
+    if (widget.getSize().x > size.x)
+        size.x = widget.getSize().x + 44;
+    m_background.setSize(size);
+    m_background.setOrigin({(float)size.x / 2, size.y});
+    m_background.setPosition(pos);
 }
 
 void StackMenu::setTitle(const std::string & title)
 {
     m_titleText.setString(title);
-    m_titleText.setPosition(getWindow().getSize().x - m_titleText.getGlobalBounds().width / 2,
-        m_titleText.getPosition().y);
+    m_titleText.setOrigin(m_titleText.getGlobalBounds().width  / 2.0f, m_titleText.getGlobalBounds().height / 2);
 }
 
 void StackMenu::handleEvent(sf::Event e, const sf::RenderWindow& window)
@@ -83,15 +70,10 @@ void StackMenu::handleEvent(sf::Event e, const sf::RenderWindow& window)
 void StackMenu::render(sf::RenderTarget& renderer)
 {
     renderer.draw(m_background);
-    renderer.draw(m_titleText);
     for (std::unique_ptr<gui::Widget>& widget : m_widgets) {
         widget->render(renderer);
     }
-}
-
-const sf::RenderWindow& StackMenu::getWindow() const
-{
-    return *m_pWindow;
+    renderer.draw(m_titleText);
 }
 
 }
